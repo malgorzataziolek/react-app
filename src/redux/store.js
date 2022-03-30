@@ -5,22 +5,34 @@ import { strContains } from '../utils/strContains';
 //selectors
 export const getFilteredCards = ({ cards, searchString }, columnId) =>
 	cards.filter(
-		card =>
-			card.columnId === columnId &&
-			strContains(card.title, searchString.searchString)
+		card => card.columnId === columnId && strContains(card.title, searchString)
 	);
 
 export const getAllColumns = state => {
 	return state.columns;
 };
 
+export const getListById = (state, listId) => {
+	return state.lists.find(list => listId === list.id);
+};
+
+export const getColumnsByList = (state, listId) => {
+	return state.columns.filter(column => column.listId === listId);
+};
+
+export const getAllLists = state => {
+	return state.lists;
+};
+
 // action creators
+
 export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
 export const addCard = payload => ({ type: 'ADD_CARD', payload });
 export const updateSearching = payload => ({
 	type: 'UPDATE_SEARCHING',
 	payload,
 });
+export const addList = payload => ({ type: 'ADD_LIST', payload });
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -32,12 +44,18 @@ const reducer = (state, action) => {
 		case 'ADD_CARD':
 			return {
 				...state,
-				cards: [...state.cards, { ...action.payload }],
+				cards: [...state.cards, { ...action.payload, id: shortid() }],
 			};
 		case 'UPDATE_SEARCHING':
 			return {
 				...state,
 				searchString: action.payload,
+			};
+
+		case 'ADD_LIST':
+			return {
+				...state,
+				lists: [...state.lists, { ...action.payload, id: shortid() }],
 			};
 		default:
 			return state;
