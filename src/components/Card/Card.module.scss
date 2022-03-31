@@ -9,18 +9,26 @@
 	margin: 0 0 $base-size 0;
 	border-radius: $radius;
 	display: flex;
-	justify-content: space-between;
 	font-weight: bold;
+	justify-content: space-between;
+}
+
+.icon {
+	margin: 0px;
+	padding: 0px;
 }
 
 .favoriteButton {
+	display: flex;
 	background-color: white;
 	border: none;
-	width: 20px;
 	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-content: center;
+}
+
+.removeButton {
+	background-color: white;
+	border: none;
+	cursor: pointer;
 }
 
 .active {
