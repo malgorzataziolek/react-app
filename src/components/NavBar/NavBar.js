@@ -15,7 +15,7 @@ const NavBar = () => {
 								className={({ isActive }) =>
 									isActive ? styles.linkActive : undefined
 								}
-								to='/home'>
+								to='/'>
 								Home
 							</NavLink>
 						</li>
